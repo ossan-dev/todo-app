@@ -1,0 +1,15 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
+app_lucky_number:
+  path: /lucky/number
+  controller: App\Controller\LuckyController::number
+
+app_todo_index:
+  path: api/todos
+  controller: App\Controller\TodoController::index
+
+app_todo_get_by_id:
+  path: api/todos/{id}
+  controller: App\Controller\TodoController::get_by_id
