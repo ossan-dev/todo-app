@@ -8,3 +8,8 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
+composer.json
+composer.json
+composer.json
+composer.lock
+symfony.lock
