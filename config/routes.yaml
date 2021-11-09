@@ -1,19 +1,19 @@
-app_todo_get_all:
+todo_get_all:
   path: api/todos
   methods: GET
   controller: App\Controller\TodoController::index
 
-app_todo_get_by_id:
+todo_get_by_id:
   path: api/todos/{id}
   methods: GET
   controller: App\Controller\TodoController::get_by_id
 
-app_todo_create:
+todo_create:
   path: api/todos
   controller: App\Controller\TodoController::create  
   methods: POST
 
-app_todo_update_by_id :
+todo_update_by_id :
   path: api/todos/{id}
   methods: PUT
   controller: App\Controller\TodoController::update_by_id
