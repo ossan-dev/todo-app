@@ -19,3 +19,7 @@ todo_update_by_id :
   controller: App\Controller\TodoController::update_by_id
 
 
+todo_toggle_is_completed:
+  path: api/todos/{id}
+  methods: PATCH
+  controller: App\Controller\TodoController::toggle_is_completed
