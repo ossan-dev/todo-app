@@ -8,8 +8,14 @@ app_lucky_number:
 
 app_todo_index:
   path: api/todos
+  methods: GET
   controller: App\Controller\TodoController::index
 
 app_todo_get_by_id:
   path: api/todos/{id}
   controller: App\Controller\TodoController::get_by_id
+
+app_todo_create:
+  path: api/todos
+  controller: App\Controller\TodoController::create  
+  methods: POST

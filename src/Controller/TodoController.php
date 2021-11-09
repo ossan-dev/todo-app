@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use App\Util\Todo;
 use App\Util\CustomException;
 
@@ -34,6 +35,22 @@ class TodoController
         $not_found = new CustomException(404);
         $not_found->add_error("Todo with id $id not found!");
         return new JsonResponse($not_found, $not_found->status_code);
+    }
+
+    // POST: api/todos
+    public function create(Request $request): JsonResponse
+    {
+        // get max id of $todos
+        $max_id = 0;
+        foreach ($this->todos as $key => $value) {
+            if($value->id > $max_id)
+                $max_id = $value->id;
+        }
+
+        $parameters = json_decode($request->getContent(), true);
+        $this->todos[] = new Todo(++$max_id, $parameters['description']);
+
+        return new JsonResponse($this->todos, 201);
     }
 }
 
