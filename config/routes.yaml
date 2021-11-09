@@ -13,9 +13,15 @@ app_todo_index:
 
 app_todo_get_by_id:
   path: api/todos/{id}
+  methods: GET
   controller: App\Controller\TodoController::get_by_id
 
 app_todo_create:
   path: api/todos
   controller: App\Controller\TodoController::create  
   methods: POST
+
+app_todo_update :
+  path: api/todos/{id}
+  methods: PUT
+  controller: App\Controller\TodoController::update_by_id
