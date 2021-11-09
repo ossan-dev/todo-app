@@ -18,7 +18,7 @@ class TodoController
     }
 
     // GET: api/todos
-    public function index(): JsonResponse
+    public function get_all(): JsonResponse
     {
         return new JsonResponse($this->todos);
     }
