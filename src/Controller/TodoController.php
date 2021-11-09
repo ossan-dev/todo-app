@@ -73,6 +73,26 @@ class TodoController
         
         return new JsonResponse($this->todos[$key_to_replace], Response::HTTP_OK);
     }
+
+    // PATCH: api/todos/{id:int}
+    public function toggle_is_completed(int $id) : JsonResponse
+    {
+        $key_to_replace = 0;
+        foreach ($this->todos as $key => $value) {
+            if($value->id == $id)
+            $key_to_replace = $key;
+        }
+        
+        if($key_to_replace == 0){
+            $not_found = new CustomException(Response::HTTP_NOT_FOUND);
+            $not_found->add_error("Todo with id $id not found!");
+            return new JsonResponse($not_found, $not_found->status_code);
+        }
+        
+        $this->todos[$key_to_replace]->is_completed = !$this->todos[$key_to_replace]->is_completed;
+
+        return new JsonResponse($this->todos[$key_to_replace], Response::HTTP_OK);
+    }
 }
 
 ?>
