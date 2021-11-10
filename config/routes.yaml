@@ -22,3 +22,8 @@ todo_toggle_is_completed:
   path: api/todos/{id}
   methods: PATCH
   controller: App\Controller\TodoController::toggle_is_completed
+
+todo_remove_by_id:
+  path: api/todos/{id}
+  methods: DELETE
+  controller: App\Controller\TodoController::remove_by_id

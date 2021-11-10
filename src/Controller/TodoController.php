@@ -103,8 +103,33 @@ class TodoController
         
         $this->todos[$key_to_replace]->is_completed = !$this->todos[$key_to_replace]->is_completed;
         $this->logger->warning("Updated Todo with id $id!");
-
+        
         return new JsonResponse($this->todos[$key_to_replace], Response::HTTP_OK);
+    }
+    
+    // DELETE: api/todos/{id:int}
+    public function remove_by_id(int $id) : JsonResponse
+    {
+        $key_to_delete = $this->todo_service->get_key_by_id($this->todos, $id);
+        
+        if($key_to_delete == 0){
+            $this->logger->error("Todo with id $id not found!");
+            throw new NotFoundHttpException("Todo with id $id not found!");
+            
+            // TODO: return a custom exception with proper Http status code
+            // $not_found = new CustomException(Response::HTTP_NOT_FOUND);
+            // $not_found->add_error("Todo with id $id not found!");
+            // return new JsonResponse($not_found, $not_found->status_code);
+        }
+        
+        unset($this->todos[$key_to_delete]);
+        $this->logger->warning("Deleted Todo with id $id!");
+
+        $this->logger->info('Remaining Todos:');
+        foreach ($this->todos as $key => $value) {
+            $this->logger->info(json_encode($value));
+        }
+        return new JsonResponse('', Response::HTTP_NO_CONTENT);
     }
 }
 
