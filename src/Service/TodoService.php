@@ -1,8 +1,16 @@
 <?php
 
 namespace App\Service;
+use Psr\Log\LoggerInterface;
 
 class TodoService {
+
+    private $logger;
+
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
     
     public function get_key_by_id(array $todos, int $id): int 
     {
@@ -13,6 +21,14 @@ class TodoService {
         }
 
         return $result;
+    }
+
+    public function log(array $todos): void
+    {
+        $this->logger->info('Remaining Todos:');
+        foreach ($todos as $key => $value) {
+            $this->logger->info(json_encode($value));
+        }
     }
 }
 

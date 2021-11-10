@@ -125,10 +125,8 @@ class TodoController
         unset($this->todos[$key_to_delete]);
         $this->logger->warning("Deleted Todo with id $id!");
 
-        $this->logger->info('Remaining Todos:');
-        foreach ($this->todos as $key => $value) {
-            $this->logger->info(json_encode($value));
-        }
+        $this->todo_service->log($this->todos);
+        
         return new JsonResponse('', Response::HTTP_NO_CONTENT);
     }
 }
