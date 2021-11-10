@@ -1,8 +1,3 @@
-todo_log:
-  path: api/todos/log
-  methods: GET
-  controller: App\Controller\TodoController::log
-
 todo_get_all:
   path: api/todos
   methods: GET

@@ -5,30 +5,24 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use App\Util\Todo;
-use App\Util\CustomException;
+// use App\Util\CustomException;
 use App\Service\TodoService;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Psr\Log\LoggerInterface;
 
 class TodoController
 {
     // this act as mock for my todos
     private $todos;
     private $todo_service;
+    private $logger;
 
-    public function __construct(TodoService $todo_service)
+    public function __construct(TodoService $todo_service, LoggerInterface $logger)
     {
         $this->todos = [1 => new Todo(1, "First Todo"), new Todo(2, "Another Todo"), new Todo(3, "Yet Another Todo")];
         $this->todo_service = $todo_service;
+        $this->logger = $logger;
     }
-
-
-    // TODO: implement log
-    // GET: api/todos/log
-    // public function log(LoggerInterface $logger): JsonResponse
-    // {
-    //     $logger->info('log() fired!');
-    //     return new JsonResponse(null, Response::HTTP_OK);
-    // }
 
     // GET: api/todos
     public function get_all(): JsonResponse
