@@ -3,11 +3,6 @@ todo_log:
   methods: GET
   controller: App\Controller\TodoController::log
 
-todo_test:
-  path: api/todos/test
-  methods: GET
-  controller: App\Controller\TodoController::test
-
 todo_get_all:
   path: api/todos
   methods: GET
