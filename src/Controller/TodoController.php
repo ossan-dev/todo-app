@@ -17,6 +17,13 @@ class TodoController
         $this->todos = array(1 => new Todo(1, "First Todo"), new Todo(2, "Another Todo"), new Todo(3, "Yet Another Todo"));
     }
 
+    // GET: api/todos/log
+    // public function log(LoggerInterface $logger): JsonResponse
+    // {
+    //     $logger->info('log() fired!');
+    //     return new JsonResponse(null, Response::HTTP_OK);
+    // }
+
     // GET: api/todos
     public function get_all(): JsonResponse
     {
