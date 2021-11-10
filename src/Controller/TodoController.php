@@ -40,14 +40,15 @@ class TodoController
             }
         }
         
+        $this->logger->error("Todo with id $id not found!");
         throw new NotFoundHttpException("Todo with id $id not found!");
-    
+        
         // TODO: return a custom exception with proper Http status code
         // $not_found = new CustomException(Response::HTTP_NOT_FOUND);
         // $not_found->add_error("Todo with id $id not found!");
         // return new JsonResponse($not_found, $not_found->status_code);
     }
-
+    
     // POST: api/todos
     public function create(Request $request): JsonResponse
     {
@@ -55,12 +56,12 @@ class TodoController
         $max_id = 0;
         foreach ($this->todos as $key => $value) {
             if($value->id > $max_id)
-                $max_id = $value->id;
+            $max_id = $value->id;
         }
-
+        
         $parameters = json_decode($request->getContent(), true);
         $this->todos[] = new Todo(++$max_id, $parameters['description']);
-
+        
         return new JsonResponse($this->todos, Response::HTTP_CREATED);
     }
     
@@ -70,8 +71,9 @@ class TodoController
         $key_to_replace = $this->todo_service->get_key_by_id($this->todos, $id);
         
         if($key_to_replace == 0){
+            $this->logger->error("Todo with id $id not found!");
             throw new NotFoundHttpException("Todo with id $id not found!");
-
+            
             // TODO: return a custom exception with proper Http status code
             // $not_found = new CustomException(Response::HTTP_NOT_FOUND);
             // $not_found->add_error("Todo with id $id not found!");
@@ -79,6 +81,7 @@ class TodoController
         }
         
         $this->todos[$key_to_replace] = new Todo($id, json_decode($request->getContent(), true)['description']);
+        $this->logger->warning("Updated Todo with id $id!");
         
         return new JsonResponse($this->todos[$key_to_replace], Response::HTTP_OK);
     }
@@ -89,8 +92,9 @@ class TodoController
         $key_to_replace = $this->todo_service->get_key_by_id($this->todos, $id);
         
         if($key_to_replace == 0){
+            $this->logger->error("Todo with id $id not found!");
             throw new NotFoundHttpException("Todo with id $id not found!");
-
+            
             // TODO: return a custom exception with proper Http status code
             // $not_found = new CustomException(Response::HTTP_NOT_FOUND);
             // $not_found->add_error("Todo with id $id not found!");
@@ -98,6 +102,7 @@ class TodoController
         }
         
         $this->todos[$key_to_replace]->is_completed = !$this->todos[$key_to_replace]->is_completed;
+        $this->logger->warning("Updated Todo with id $id!");
 
         return new JsonResponse($this->todos[$key_to_replace], Response::HTTP_OK);
     }
