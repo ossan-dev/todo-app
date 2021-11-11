@@ -7,10 +7,28 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class UserController extends AbstractController
 {
+
+    // GET: api/users/{id:int}
+    public function get_by_id(int $id): JsonResponse
+    {
+        // plain implementation (without repository)
+        $user = $this->getDoctrine()
+                    ->getRepository(User::class)
+                    ->find($id);
+
+        if(!$user) {
+            throw new NotFoundHttpException("The user with id {$id} has not been found in db!");
+        }
+
+        return $this->json($user);
+    }
+
+    // POST: api/users
     public function create(Request $request, ValidatorInterface $validator): JsonResponse
     {
         // get payload data

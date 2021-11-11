@@ -2,3 +2,8 @@ user_create:
   path: api/users
   methods: POST
   controller: App\Controller\UserController::create
+
+user_get_by_id:
+  path: api/users/{id}
+  methods: GET
+  controller: App\Controller\UserController::get_by_id
