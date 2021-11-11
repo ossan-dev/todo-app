@@ -42,22 +42,42 @@ class UserController extends AbstractController
     {
         // get payload data
         $parameters = json_decode($request->getContent(), true);
-
+        
         $entity_manager = $this->getDoctrine()->getManager();
         $user = new User();
         $user->setFirstName($parameters['first_name']);
         $user->setLastName($parameters['last_name']);
         $user->setEmail($parameters['email']);
-
+        
         // check if the input is correct
         $errors = $validator->validate($user);
         if(count($errors) > 0){
             throw new BadRequestException((string)$errors);
         }
-
+        
         $entity_manager->persist($user);
         $entity_manager->flush();
-
+        
         return $this->json(['message' => "The user with id {$user->getId()} has been saved to db!"]);
+    }
+    
+    // PUT: api/users/{id:int}
+    public function update_by_id(int $id, Request $request, UserRepository $userRepository) : JsonResponse
+    {
+        $user = $userRepository
+                ->find($id);
+        
+        if(!$user){
+            throw new NotFoundHttpException("The user with id {$id} has not been found in db!");
+        }
+        
+        $parameters = json_decode($request->getContent(), true);
+        $user->setFirstName($parameters['first_name']);
+        $user->setLastName($parameters['last_name']);
+        $user->setEmail($parameters['email']);
+        
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->json($user);
     }
 }
