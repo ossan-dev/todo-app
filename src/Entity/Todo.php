@@ -27,6 +27,11 @@ class Todo
      */
     private $is_completed;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $insert_date;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +57,18 @@ class Todo
     public function setIsCompleted(bool $is_completed): self
     {
         $this->is_completed = $is_completed;
+
+        return $this;
+    }
+
+    public function getInsertDate(): ?\DateTimeInterface
+    {
+        return $this->insert_date;
+    }
+
+    public function setInsertDate(\DateTimeInterface $insert_date): self
+    {
+        $this->insert_date = $insert_date;
 
         return $this;
     }
