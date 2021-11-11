@@ -2,11 +2,20 @@ user_get_all:
   path: api/users
   methods: GET
   controller: App\Controller\UserController::get_all
+  condition: "!request.query.has('numChars')"
 
 user_get_by_id:
   path: api/users/{id}
   methods: GET
   controller: App\Controller\UserController::get_by_id
+
+getAllLongerThan:
+  path: api/users{numChars?\d+\}
+  methods: GET
+  controller: App\Controller\UserController::getAllLongerThan
+  defaults:
+    numChars: 1
+  condition: "request.query.has('numChars')"
 
 user_create:
   path: api/users

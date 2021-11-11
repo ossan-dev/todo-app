@@ -23,6 +23,17 @@ class UserController extends AbstractController
         return $this->json($users);
     }
 
+    // GET: api/users?numChars={numChars:int}
+    public function getAllLongerThan(Request $request, UserRepository $userRepository) : JsonResponse
+    {
+        $numChars = $request->query->get('numChars');
+
+        $users = $userRepository
+                    ->findAllLastNameLongerThan($numChars);
+
+        return $this->json($users);
+    }
+
     // GET: api/users/{id:int}
     public function get_by_id(int $id): JsonResponse
     {
