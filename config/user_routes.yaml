@@ -1,10 +1,10 @@
-getAll:
+user_getAll:
   path: api/users
   methods: GET
   controller: App\Controller\UserController::getAll
   condition: "!request.query.has('numChars')"
 
-getAllLongerThan:
+user_getAllLongerThan:
   path: api/users{numChars?\d+\}
   methods: GET
   controller: App\Controller\UserController::getAllLongerThan
@@ -12,22 +12,22 @@ getAllLongerThan:
     numChars: 1
   condition: "request.query.has('numChars')"
 
-getById:
+user_getById:
   path: api/users/{id}
   methods: GET
   controller: App\Controller\UserController::getById
 
-create:
+user_create:
   path: api/users
   methods: POST
   controller: App\Controller\UserController::create
 
-updateById:
+user_updateById:
   path: api/users/{id}  
   methods: PUT
   controller: App\Controller\UserController::updateById
 
-removeById:
+user_removeById:
   path: api/users/{id}  
   methods: DELETE
   controller: App\Controller\UserController::removeById
