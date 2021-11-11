@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -12,6 +13,14 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class UserController extends AbstractController
 {
+    // GET: api/users
+    public function get_all(UserRepository $userRepository): JsonResponse
+    {
+        $users = $userRepository
+                    ->findAll();
+
+        return $this->json($users);
+    }
 
     // GET: api/users/{id:int}
     public function get_by_id(int $id): JsonResponse
