@@ -3,27 +3,5 @@ todo_get_all:
   methods: GET
   controller: App\Controller\TodoController::index
 
-todo_get_by_id:
-  path: api/todos/{id}
-  methods: GET
-  controller: App\Controller\TodoController::get_by_id
-
-todo_create:
-  path: api/todos
-  controller: App\Controller\TodoController::create  
-  methods: POST
-
-todo_update_by_id :
-  path: api/todos/{id}
-  methods: PUT
-  controller: App\Controller\TodoController::update_by_id
-
-todo_toggle_is_completed:
-  path: api/todos/{id}
-  methods: PATCH
-  controller: App\Controller\TodoController::toggle_is_completed
-
-todo_remove_by_id:
-  path: api/todos/{id}
-  methods: DELETE
-  controller: App\Controller\TodoController::remove_by_id
+todo_routes:
+  resource: './todo_routes.yaml'
