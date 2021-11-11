@@ -1,4 +1,0 @@
-user_index:
-  path: api/users
-  methods: GET
-  controller: App\Controller\UserController::index
