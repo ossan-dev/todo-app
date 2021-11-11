@@ -1,7 +1,5 @@
-todo_get_all:
-  path: api/todos
-  methods: GET
-  controller: App\Controller\TodoController::index
+user_routes:
+  resource: './user_routes.yaml'
 
 todo_routes:
   resource: './todo_routes.yaml'
