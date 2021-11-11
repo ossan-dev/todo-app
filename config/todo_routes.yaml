@@ -1,29 +1,29 @@
-todo_get_all:
+getAll:
   path: api/todos
   methods: GET
-  controller: App\Controller\TodoController::index
+  controller: App\Controller\TodoController::getAll
 
-todo_get_by_id:
+getById:
   path: api/todos/{id}
   methods: GET
-  controller: App\Controller\TodoController::get_by_id
+  controller: App\Controller\TodoController::getById
 
-todo_create:
+create:
   path: api/todos
   controller: App\Controller\TodoController::create  
   methods: POST
 
-todo_update_by_id :
+updateById :
   path: api/todos/{id}
   methods: PUT
-  controller: App\Controller\TodoController::update_by_id
+  controller: App\Controller\TodoController::updateById
 
-todo_toggle_is_completed:
+toggleIsCompleted:
   path: api/todos/{id}
   methods: PATCH
-  controller: App\Controller\TodoController::toggle_is_completed
+  controller: App\Controller\TodoController::toggleIsCompleted
 
-todo_remove_by_id:
+removeById:
   path: api/todos/{id}
   methods: DELETE
-  controller: App\Controller\TodoController::remove_by_id
+  controller: App\Controller\TodoController::removeById

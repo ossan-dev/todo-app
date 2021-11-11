@@ -12,7 +12,7 @@ class TodoService {
         $this->logger = $logger;
     }
     
-    public function get_key_by_id(array $todos, int $id): int 
+    public function getKeyById(array $todos, int $id): int 
     {
         $result = 0;
         foreach ($todos as $key => $value) {

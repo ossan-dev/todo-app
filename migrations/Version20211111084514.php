@@ -21,7 +21,7 @@ final class Version20211111084514 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE SEQUENCE todo_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
-        $this->addSql('CREATE TABLE todo (id INT NOT NULL, description VARCHAR(255) NOT NULL, is_completed BOOLEAN NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE todo (id INT NOT NULL, description VARCHAR(255) NOT NULL, isCompleted BOOLEAN NOT NULL, PRIMARY KEY(id))');
     }
 
     public function down(Schema $schema): void

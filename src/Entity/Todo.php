@@ -25,7 +25,7 @@ class Todo
     /**
      * @ORM\Column(type="boolean")
      */
-    private $is_completed;
+    private $isCompleted;
 
     /**
      * @ORM\Column(type="datetime")
@@ -51,12 +51,12 @@ class Todo
 
     public function getIsCompleted(): ?bool
     {
-        return $this->is_completed;
+        return $this->isCompleted;
     }
 
-    public function setIsCompleted(bool $is_completed): self
+    public function setIsCompleted(bool $isCompleted): self
     {
-        $this->is_completed = $is_completed;
+        $this->isCompleted = $isCompleted;
 
         return $this;
     }

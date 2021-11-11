@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class UserController extends AbstractController
 {
     // GET: api/users
-    public function get_all(UserRepository $userRepository): JsonResponse
+    public function getAll(UserRepository $userRepository): JsonResponse
     {
         $users = $userRepository
                     ->findAll();
@@ -35,7 +35,7 @@ class UserController extends AbstractController
     }
 
     // GET: api/users/{id:int}
-    public function get_by_id(int $id): JsonResponse
+    public function getById(int $id): JsonResponse
     {
         // plain implementation (without repository)
         $user = $this->getDoctrine()
@@ -55,10 +55,10 @@ class UserController extends AbstractController
         // get payload data
         $parameters = json_decode($request->getContent(), true);
         
-        $entity_manager = $this->getDoctrine()->getManager();
+        $entityManager = $this->getDoctrine()->getManager();
         $user = new User();
-        $user->setFirstName($parameters['first_name']);
-        $user->setLastName($parameters['last_name']);
+        $user->setFirstName($parameters['firstName']);
+        $user->setLastName($parameters['lastName']);
         $user->setEmail($parameters['email']);
         
         // check if the input is correct
@@ -67,14 +67,14 @@ class UserController extends AbstractController
             throw new BadRequestException((string)$errors);
         }
         
-        $entity_manager->persist($user);
-        $entity_manager->flush();
+        $entityManager->persist($user);
+        $entityManager->flush();
         
         return $this->json(['message' => "The user with id {$user->getId()} has been saved to db!"]);
     }
     
     // PUT: api/users/{id:int}
-    public function update_by_id(int $id, Request $request, UserRepository $userRepository) : JsonResponse
+    public function updateById(int $id, Request $request, UserRepository $userRepository) : JsonResponse
     {
         $user = $userRepository
                 ->find($id);
@@ -84,8 +84,8 @@ class UserController extends AbstractController
         }
         
         $parameters = json_decode($request->getContent(), true);
-        $user->setFirstName($parameters['first_name']);
-        $user->setLastName($parameters['last_name']);
+        $user->setFirstName($parameters['firstName']);
+        $user->setLastName($parameters['lastName']);
         $user->setEmail($parameters['email']);
         
         $this->getDoctrine()->getManager()->flush();
@@ -94,7 +94,7 @@ class UserController extends AbstractController
     }
     
     // DELETE: api/users/{id:int}
-    public function remove_by_id(int $id, UserRepository $userRepository) : JsonResponse
+    public function removeById(int $id, UserRepository $userRepository) : JsonResponse
     {
         $user = $userRepository
         ->find($id);
