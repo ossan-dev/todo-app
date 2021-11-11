@@ -1,12 +1,12 @@
 App\Entity\User:
   properties:
-    first_name:
+    firstName:
       - NotNull: ~
       - Length:
           min: 1
           max: 30
       
-    last_name:
+    lastName:
       - NotNull: ~
       - Length:
           min: 1

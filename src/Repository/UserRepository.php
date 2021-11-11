@@ -29,7 +29,7 @@ class UserRepository extends ServiceEntityRepository
         $query = $entityManager->createQuery(
             'SELECT u
              FROM App\Entity\User u
-             WHERE length(u.last_name) > :numChars
+             WHERE length(u.lastName) > :numChars
              ORDER BY u.id ASC'
         )->setParameter('numChars', $numChars);
 
