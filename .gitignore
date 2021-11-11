@@ -13,3 +13,5 @@ composer.json
 composer.json
 composer.lock
 symfony.lock
+.env
+bin/
