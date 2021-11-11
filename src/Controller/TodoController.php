@@ -19,7 +19,11 @@ class TodoController
 
     public function __construct(TodoService $todo_service, LoggerInterface $logger)
     {
-        $this->todos = [1 => new Todo(1, "First Todo"), new Todo(2, "Another Todo"), new Todo(3, "Yet Another Todo")];
+        $this->todos = [
+            1 => new Todo(1, "First Todo"),
+            new Todo(2, "Another Todo"),
+            new Todo(3, "Yet Another Todo"),
+        ];
         $this->todo_service = $todo_service;
         $this->logger = $logger;
     }
