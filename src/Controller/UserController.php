@@ -11,14 +11,17 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
 {
-    public function create(): JsonResponse
+    public function create(Request $request): JsonResponse
     {
+        // get payload data
+        $parameters = json_decode($request->getContent(), true);
+
         $entity_manager = $this->getDoctrine()->getManager();
 
         $user = new User();
-        $user->setFirstName('ivan');
-        $user->setLastName('pesenti');
-        $user->setEmail('ipesenti@sorint.it');
+        $user->setFirstName($parameters['first_name']);
+        $user->setLastName($parameters['last_name']);
+        $user->setEmail($parameters['email']);
 
         $entity_manager->persist($user);
 
