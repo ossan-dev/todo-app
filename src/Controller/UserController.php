@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -77,7 +78,23 @@ class UserController extends AbstractController
         $user->setEmail($parameters['email']);
         
         $this->getDoctrine()->getManager()->flush();
-
+        
         return $this->json($user);
+    }
+    
+    // DELETE: api/users/{id:int}
+    public function remove_by_id(int $id, UserRepository $userRepository) : JsonResponse
+    {
+        $user = $userRepository
+        ->find($id);
+        
+        if(!$user){
+            throw new NotFoundHttpException("The user with id {$id} has not been found in db!");
+        }
+
+        $this->getDoctrine()->getManager()->remove($user);
+        $this->getDoctrine()->getManager()->flush();
+        
+        return $this->json('', Response::HTTP_NO_CONTENT);
     }
 }

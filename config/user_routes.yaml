@@ -17,3 +17,8 @@ user_update_by_id:
   path: api/users/{id}  
   methods: PUT
   controller: App\Controller\UserController::update_by_id
+
+user_remove_by_id:
+  path: api/users/{id}  
+  methods: DELETE
+  controller: App\Controller\UserController::remove_by_id
