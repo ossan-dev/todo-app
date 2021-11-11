@@ -1,15 +1,18 @@
 App\Entity\User:
   properties:
     first_name:
+      - NotNull: ~
       - Length:
           min: 1
           max: 30
       
     last_name:
+      - NotNull: ~
       - Length:
           min: 1
           max: 30
 
     email:
+      - NotNull: ~
       - Email:
           message: The email "{{ value }}" is not a valid email.
