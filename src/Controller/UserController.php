@@ -57,9 +57,9 @@ class UserController extends AbstractController
         
         $entityManager = $this->getDoctrine()->getManager();
         $user = new User();
-        $user->setFirstName($parameters['firstName']);
-        $user->setLastName($parameters['lastName']);
-        $user->setEmail($parameters['email']);
+        $user->setFirstName($parameters['firstName'] ?? '');
+        $user->setLastName($parameters['lastName'] ?? '');
+        $user->setEmail($parameters['email'] ?? '');
         
         // check if the input is correct
         $errors = $validator->validate($user);
