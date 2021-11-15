@@ -84,9 +84,13 @@ class UserController extends AbstractController
         }
         
         $parameters = json_decode($request->getContent(), true);
-        $user->setFirstName($parameters['firstName']);
-        $user->setLastName($parameters['lastName']);
-        $user->setEmail($parameters['email']);
+        // update only fields present
+        if(array_key_exists('firstName', $parameters))
+            $user->setFirstName($parameters['firstName']);
+        if(array_key_exists('lastName', $parameters))
+            $user->setLastName($parameters['lastName']);
+        if(array_key_exists('email', $parameters))
+            $user->setEmail($parameters['email']);
         
         $this->getDoctrine()->getManager()->flush();
         
