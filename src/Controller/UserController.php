@@ -60,6 +60,7 @@ class UserController extends AbstractController
         $user->setFirstName($parameters['firstName'] ?? '');
         $user->setLastName($parameters['lastName'] ?? '');
         $user->setEmail($parameters['email'] ?? '');
+        $user->setRole($parameters['role'] ?? '');
         
         // check if the input is correct
         $errors = $validator->validate($user);
@@ -91,6 +92,8 @@ class UserController extends AbstractController
             $user->setLastName($parameters['lastName']);
         if(array_key_exists('email', $parameters))
             $user->setEmail($parameters['email']);
+        if(array_key_exists('role', $parameters))
+            $user->setEmail($parameters['role']);
         
         $this->getDoctrine()->getManager()->flush();
         
