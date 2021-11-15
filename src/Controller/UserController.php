@@ -33,6 +33,18 @@ class UserController extends AbstractController
 
         return $this->json($users);
     }
+    
+    // GET: api/users?numChars={role:string&isSortedAsc}
+    public function getAllByRole(Request $request, UserRepository $userRepository) : JsonResponse
+    {
+        $role = $request->query->get('role');
+        $isSortedAsc = $request->query->get('isSortedAsc') ?? 1;
+
+        $users = $userRepository
+                    ->findAllByRole($role, $isSortedAsc);
+
+        return $this->json($users);
+    }
 
     // GET: api/users/{id:int}
     public function getById(int $id): JsonResponse

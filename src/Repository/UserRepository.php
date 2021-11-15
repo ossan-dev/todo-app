@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use phpDocumentor\Reflection\Types\Boolean;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -34,5 +35,21 @@ class UserRepository extends ServiceEntityRepository
         )->setParameter('numChars', $numChars);
 
         return $query->getResult();
+    }
+
+    /**
+     * @return User[]
+     */
+    public function findAllByRole(string $role, bool $isSortedAsc) : array
+    {
+        $qb = $this->createQueryBuilder('u')
+                ->where('u.role = :role')
+                ->setParameter('role', $role);
+
+        // add this clause dynamically
+        ($isSortedAsc) ? $qb->orderBy('u.id', 'ASC') : $qb->orderBy('u.id', 'DESC');
+            
+        $query = $qb->getQuery();
+        return $query->execute();
     }
 }

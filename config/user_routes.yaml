@@ -2,7 +2,7 @@ user_getAll:
   path: api/users
   methods: GET
   controller: App\Controller\UserController::getAll
-  condition: "!request.query.has('numChars')"
+  condition: "!request.query.has('numChars') && !request.query.has('role')"
 
 user_getAllLongerThan:
   path: api/users{numChars?\d+\}
@@ -11,6 +11,14 @@ user_getAllLongerThan:
   defaults:
     numChars: 1
   condition: "request.query.has('numChars')"
+  
+user_getAllByRole:
+  path: api/users
+  methods: GET
+  controller: App\Controller\UserController::getAllByRole
+  defaults:
+    role: 'forwarder'
+  condition: "request.query.has('role')"
 
 user_getById:
   path: api/users/{id}
