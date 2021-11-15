@@ -16,3 +16,9 @@ App\Entity\User:
       - NotNull: ~
       - Email:
           message: The email "{{ value }}" is not a valid email.
+
+    role:
+      - NotNull: ~
+      - Length:
+          min: 1
+          max: 30

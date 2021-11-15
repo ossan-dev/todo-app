@@ -33,6 +33,11 @@ class User
      */
     private $email;
 
+    /**
+     * @ORM\Column(type="string", length=30, options={"default":"forwarder"})
+     */
+    private $role;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -70,6 +75,18 @@ class User
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getRole(): ?string
+    {
+        return $this->role;
+    }
+
+    public function setRole(string $role): self
+    {
+        $this->role = $role;
 
         return $this;
     }
